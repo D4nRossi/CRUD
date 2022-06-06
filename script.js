@@ -1,6 +1,4 @@
 'use strict'
-var LocalStorage = require('node-localstorage').LocalStorage,
-localStorage = new LocalStorage('./scratch');
 
 
 const openModal = () => document.getElementById('modal').classList.add('active');
@@ -148,12 +146,3 @@ document.getElementById('salvar').addEventListener('click', saveClient);
 
 document.querySelector('#tableClient>tbody').addEventListener('click', editDelete);
 
-//view
-const express = require('express');
-const app = express();
-
-app.get("/", function(req, res){
-    res.sendFile(__dirname + "index.html")
-})
-
-app.listen(8080)
