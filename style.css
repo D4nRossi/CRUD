@@ -1,0 +1,209 @@
+/*Variaveis*/
+:root{
+    --primary-color: rgb(255, 186, 0);
+    --secundary-color: rgba(255, 186, 0,0.3); 
+    --btn-azul: #00b6f6;
+    --btn-azul-2: #0063c7;
+    --btn-verde: #00761d;
+    --btn-verde-2: #00822e;
+    --btn-vermelho: #df0000;
+    --btn-vermelho-2: #f40000;    
+}
+
+/*Geral*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    background-color: var(--primary-color);
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    box-shadow: 0 1px 2px #ccc;
+}
+
+main{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+    margin: 5vh auto;
+    padding: 50px;
+    box-shadow: 2px 2px 10px;
+    gap: 20px;
+}
+
+footer{
+    width: 100%;
+    text-align: center;
+    font-weight: 200;
+    font-style: italic;
+    padding: 20px;
+}
+
+/*Header*/
+
+.header-title{
+    color: #000;
+    font-size: 2rem;
+}
+
+/*Botão*/
+
+.button{
+    border-style: none;
+    height: 40px;
+    padding: 6px 12px;
+    background-color: #000;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: box-shadow .3s ease;
+}
+
+.button.blue{
+    background-color: var(--btn-azul);
+}
+.button.blue:hover{
+    box-shadow: inset 200px 0 0 var(--btn-azul-2);
+}
+
+.button.green{
+    background-color: var(--btn-verde);
+}
+.button.green:hover{
+    box-shadow: inset 200px 0 0 var(--btn-verde-2);
+}
+
+.button.red{
+    background-color: var(--btn-vermelho);
+}
+.button.red:hover{
+    box-shadow: inset 200px 0 0 var(--btn-vermelho-2);
+}
+
+
+/*Tabela*/
+
+.records{
+    width: 100%;
+    user-select: none;
+    text-align: left;
+}
+
+.records th{
+    height: 50px;
+    background-color: var(--primary-color);
+    padding-left: 20px;
+    font-size: 1.2rem;
+}
+
+.records td{
+    height: 50px;
+    padding-left: 20px;
+}
+
+.records th:last-child,
+.records td:last-child{
+    padding: 0;
+    min-height: 140px;
+    text-align: center;
+}
+
+.records tr:hover{
+    background-color: var(--secundary-color);
+}
+
+/*Modal*/
+
+.modal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000090;
+    opacity: 0;
+    z-index: -1;
+}
+
+.modal.active{
+    opacity: 1;
+    z-index: 1;
+}
+
+.modal-content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50vw;
+    margin: 15vh auto;
+    padding-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 1px 1px 10px #000;
+}
+
+.modal-header{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    height: 40px;
+    line-height: 40px;
+    text-transform: uppercase;
+}
+
+.modal-close{
+    position: absolute;
+    right: 0;
+    display: block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.modal-close:hover{
+    background-color: tomato;
+    color: white;
+}
+
+.modal-form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.modal-field{
+    height: 40px;
+    outline-style: none;
+    border-style: none;
+    box-shadow: 0 0 2px #000;
+    padding: 0 10px;
+    font-size: 1rem;
+}
+
+.modal-field:focus{
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 3px var(--primary-color);
+}
+
+form.modal-footer{
+    background-color: inherit;
+    text-align: right;
+    padding: 0 20px;
+}

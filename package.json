@@ -1,0 +1,21 @@
+{
+  "name": "sembd",
+  "version": "1.0.0",
+  "description": "odio dor e sofrimento",
+  "main": "script.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dan",
+  "license": "ISC",
+  "dependencies": {
+    "consolidate": "^0.16.0",
+    "express": "^4.18.1",
+    "jsdom": "^19.0.0",
+    "node-localstorage": "^2.2.1",
+    "nodemon": "^2.0.16",
+    "router": "^1.3.7",
+    "swig": "^1.4.2"
+  }
+}

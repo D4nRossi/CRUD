@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>CRUD</title>
+</head>
+<body>
+    <header>
+        <h1 class="header-title">Cadastro</h1>
+    </header>
+    
+    <main>
+        <button type="button" class="button blue" id="cadastrarCliente">Cadastrar</button>
+        <table id="tableClient" class="records">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Celular</th>
+                    <th>Cidade</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <header class="modal-header">
+                    <h2>Novo</h2>
+                    <span class="modal-close" id="modalClose">&#10006;</span>
+                </header>
+                <form action="" id="form" class="modal-form">
+                    <input type="text" id="nome" data-index="new" class="modal-field" placeholder="Nome" required>
+                    <input type="email" id="email" class="modal-field" placeholder="Email" required>
+                    <input type="tel" id="celular" class="modal-field" placeholder="Celular" required>
+                    <input type="text" id="cidade" class="modal-field" placeholder="Cidade" required>
+                
+                <footer class="modal-footer">
+                    <button  id="salvar" class="button green">Salvar</button>
+                    <button id="cancelar" class="button blue">Cancelar</button>
+                </footer>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        Copyright &copy; Dan 
+    </footer>
+
+<script src="server.js"></script>
+<script src="script.js" defer></script>    
+</body>
+</html>
