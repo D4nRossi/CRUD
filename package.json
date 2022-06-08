@@ -2,7 +2,7 @@
   "name": "sembd",
   "version": "1.0.0",
   "description": "odio dor e sofrimento",
-  "main": "script.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"

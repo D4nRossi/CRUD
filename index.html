@@ -4,7 +4,218 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="public/css/style.css">
+    <style>
+        /*Variaveis*/
+:root{
+    --primary-color: rgb(255, 186, 0);
+    --secundary-color: rgba(255, 186, 0,0.3); 
+    --btn-azul: #00b6f6;
+    --btn-azul-2: #0063c7;
+    --btn-verde: #00761d;
+    --btn-verde-2: #00822e;
+    --btn-vermelho: #df0000;
+    --btn-vermelho-2: #f40000;    
+}
+
+/*Geral*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    background-color: var(--primary-color);
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    box-shadow: 0 1px 2px #ccc;
+}
+
+main{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+    margin: 5vh auto;
+    padding: 50px;
+    box-shadow: 2px 2px 10px;
+    gap: 20px;
+}
+
+footer{
+    width: 100%;
+    text-align: center;
+    font-weight: 200;
+    font-style: italic;
+    padding: 20px;
+}
+
+/*Header*/
+
+.header-title{
+    color: #000;
+    font-size: 2rem;
+}
+
+/*Botão*/
+
+.button{
+    border-style: none;
+    height: 40px;
+    padding: 6px 12px;
+    background-color: #000;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: box-shadow .3s ease;
+}
+
+.button.blue{
+    background-color: var(--btn-azul);
+}
+.button.blue:hover{
+    box-shadow: inset 200px 0 0 var(--btn-azul-2);
+}
+
+.button.green{
+    background-color: var(--btn-verde);
+}
+.button.green:hover{
+    box-shadow: inset 200px 0 0 var(--btn-verde-2);
+}
+
+.button.red{
+    background-color: var(--btn-vermelho);
+}
+.button.red:hover{
+    box-shadow: inset 200px 0 0 var(--btn-vermelho-2);
+}
+
+
+/*Tabela*/
+
+.records{
+    width: 100%;
+    user-select: none;
+    text-align: left;
+}
+
+.records th{
+    height: 50px;
+    background-color: var(--primary-color);
+    padding-left: 20px;
+    font-size: 1.2rem;
+}
+
+.records td{
+    height: 50px;
+    padding-left: 20px;
+}
+
+.records th:last-child,
+.records td:last-child{
+    padding: 0;
+    min-height: 140px;
+    text-align: center;
+}
+
+.records tr:hover{
+    background-color: var(--secundary-color);
+}
+
+/*Modal*/
+
+.modal{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #00000090;
+    opacity: 0;
+    z-index: -1;
+}
+
+.modal.active{
+    opacity: 1;
+    z-index: 1;
+}
+
+.modal-content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 50vw;
+    margin: 15vh auto;
+    padding-bottom: 20px;
+    background-color: #fff;
+    box-shadow: 1px 1px 10px #000;
+}
+
+.modal-header{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    height: 40px;
+    line-height: 40px;
+    text-transform: uppercase;
+}
+
+.modal-close{
+    position: absolute;
+    right: 0;
+    display: block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    user-select: none;
+    cursor: pointer;
+    transition: .2s ease;
+}
+
+.modal-close:hover{
+    background-color: tomato;
+    color: white;
+}
+
+.modal-form{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.modal-field{
+    height: 40px;
+    outline-style: none;
+    border-style: none;
+    box-shadow: 0 0 2px #000;
+    padding: 0 10px;
+    font-size: 1rem;
+}
+
+.modal-field:focus{
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 3px var(--primary-color);
+}
+
+form.modal-footer{
+    background-color: inherit;
+    text-align: right;
+    padding: 0 20px;
+}
+    </style>
     <title>CRUD</title>
 </head>
 <body>
@@ -53,7 +264,157 @@
         Copyright &copy; Dan 
     </footer>
 
-<script src="server.js"></script>
-<script src="script.js" defer></script>    
+<script src="public/js/script.js" defer></script>
+<script>
+    'use strict'
+
+
+const openModal = () => document.getElementById('modal').classList.add('active');
+const closeModal = () => {
+    clearFields();
+    document.getElementById('modal').classList.remove('active');
+}
+
+//Variaveis do CRUD
+
+const getLocalStorage = ()=> JSON.parse(localStorage.getItem('db_client')) ??/*se for nulo*/ []
+const setLocalStorage = (dbClient)=> localStorage.setItem("db_client", JSON.stringify(dbClient))
+//CRUD
+
+//Create
+const createClient = (client) =>{
+    const dbClient = getLocalStorage()
+    dbClient.push(client)
+    setLocalStorage(dbClient)
+}
+
+
+//Read
+const readClient = () => getLocalStorage()
+
+
+//Update
+const updateClient = (index, client) =>{
+    const dbClient = readClient()
+    dbClient[index] = client
+    setLocalStorage(dbClient)
+}
+
+
+//Delete
+const del = (index) =>{
+    const dbClient = readClient()
+    dbClient.splice(index, 1)
+    setLocalStorage(dbClient)
+}
+
+
+
+//Ler o form
+const clearFields = () =>{
+    const fields = document.querySelectorAll('.modal-field')
+    fields.forEach(field => field.value = "")
+}
+
+const isValidFields = () =>{
+    return document.getElementById('form').reportValidity()
+}
+
+const saveClient = () =>{
+    if(isValidFields()){
+        const client ={
+            nome: document.getElementById('nome').value,
+            email: document.getElementById('email').value,
+            celular: document.getElementById('celular').value,
+            cidade: document.getElementById('cidade').value,
+        }
+        const index = document.getElementById('nome').dataset.index
+        if(index == 'new'){
+            createClient(client)
+            updateTable()
+            closeModal() 
+        }else{
+            updateClient(index, client)
+            updateTable()
+            closeModal()
+        }
+    }
+}
+
+
+//Colocar na tabela
+const clearTable = () =>{
+    const rows = document.querySelectorAll('#tableClient>tbody tr')
+    rows.forEach(row => row.parentNode.removeChild(row))
+}
+
+const createRow = (client, index) =>{
+    const newRow = document.createElement('tr')
+    newRow.innerHTML = `
+        <td>${client.nome}</td>
+        <td>${client.email}</td>
+        <td>${client.celular}</td>
+        <td>${client.cidade}</td>
+        <td>
+            <button type="button" class="button green" data-action="edit-${index}">Editar</button>
+            <button type="button" class="button red" data-action="delete-${index}">Excluir</button>
+        </td>
+    `
+    document.querySelector('#tableClient>tbody').appendChild(newRow);
+}
+
+const updateTable = () =>{    
+    const dbClient = readClient()
+    clearTable()
+    dbClient.forEach(createRow)
+}
+updateTable()
+
+
+//Editar
+const editClient = (index) =>{
+    const client = readClient()[index]
+    client.index = index
+    fillFields(client)
+    openModal()
+}
+
+const fillFields = (client) =>{
+    document.getElementById('nome').value = client.nome
+    document.getElementById('email').value = client.email
+    document.getElementById('celular').value = client.celular
+    document.getElementById('cidade').value = client.cidade
+    document.getElementById('nome').dataset.index = client.index
+}
+
+const editDelete = (event) =>{
+    if(event.target.type == 'button'){
+        const [action, index] = event.target.dataset.action.split('-'); 
+        
+        if(action == 'edit'){
+            editClient(index)
+        }else{
+            const client = readClient()[index]
+            const response = confirm(`Deseja excluir o(a) cliente ${client.nome}`)
+            if(response){
+                del(index)
+                updateTable()
+            }
+        }
+    }
+}
+
+
+
+//Eventos
+document.getElementById('cadastrarCliente').addEventListener('click', openModal);
+document.getElementById('modalClose').addEventListener('click', closeModal);
+
+document.getElementById('salvar').addEventListener('click', saveClient);
+
+document.querySelector('#tableClient>tbody').addEventListener('click', editDelete);
+
+
+</script>    
 </body>
 </html>
