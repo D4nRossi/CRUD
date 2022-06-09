@@ -8,8 +8,8 @@
     <style>
         /*Variaveis*/
 :root{
-    --primary-color: rgb(255, 186, 0);
-    --secundary-color: rgba(255, 186, 0,0.3); 
+    --primary-color: rgb(135,206,250);
+    --secundary-color: rgba(173,216,230,0.3); 
     --btn-azul: #00b6f6;
     --btn-azul-2: #0063c7;
     --btn-verde: #00761d;
@@ -17,6 +17,9 @@
     --btn-vermelho: #df0000;
     --btn-vermelho-2: #f40000;    
 }
+
+/*Imports*/
+@import url('https://fonts.googleapis.com/css2?family=Barlow&family=Poppins&display=swap');
 
 /*Geral*/
 *{
@@ -37,6 +40,7 @@ header{
     text-align: center;
     line-height: 70px;
     box-shadow: 0 1px 2px #ccc;
+    font-family: 'Poppins', sans-serif;
 }
 
 main{
@@ -49,6 +53,9 @@ main{
     padding: 50px;
     box-shadow: 2px 2px 10px;
     gap: 20px;
+    font-family: 'Barlow', sans-serif;
+    border-radius: 10px;
+    background-color: #FFFAFA
 }
 
 footer{
@@ -115,11 +122,14 @@ footer{
     background-color: var(--primary-color);
     padding-left: 20px;
     font-size: 1.2rem;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .records td{
     height: 50px;
     padding-left: 20px;
+    border-radius: 10px;
 }
 
 .records th:last-child,
@@ -215,12 +225,14 @@ form.modal-footer{
     text-align: right;
     padding: 0 20px;
 }
+
+
     </style>
     <title>CRUD</title>
 </head>
 <body>
     <header>
-        <h1 class="header-title">Cadastro</h1>
+        <h1 class="header-title">A3 de Usabilidade, desenvolvimento web, mobile e jogos</h1>
     </header>
     
     <main>
@@ -261,7 +273,11 @@ form.modal-footer{
     </main>
 
     <footer>
-        Copyright &copy; Dan 
+        <div class="copy">
+            <p>Copyright, todos os direitos reservados &copy;</p> 
+            <br>
+            <p>Rafael Yokoyama - 125111345287&nbsp;&nbsp;&nbsp; Daniel Rossi - 125111355552&nbsp;&nbsp;&nbsp; Mayara Lopes - 125111371700&nbsp;&nbsp;&nbsp; Ian Carvalheiro - 12511135585&nbsp;&nbsp;&nbsp; Gabriel Brandão - 125111353577</p>
+        </div> 
     </footer>
 
 <script src="public/js/script.js" defer></script>
